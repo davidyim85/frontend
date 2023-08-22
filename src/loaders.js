@@ -1,5 +1,6 @@
 import {baseUrl} from "./base_url";
 import { redirect } from "react-router-dom";
+import axios from 'axios';
 
 const authCheck = () => {
     const loggedIn = localStorage.getItem('loggedIn')
@@ -15,8 +16,8 @@ export const placesLoader = async () => {
         return redirect('/login')
     }
 
-    const response = await fetch(`${baseUrl}/places`, {
-        credentials: "include"
+    const response = await axios.get(`${baseUrl}/places`, {
+        withCredentials: true
     })
     const places = await response.json()
     return places
